@@ -19,14 +19,15 @@ const db = getDatabase();
 
 const fileInput = document.querySelector('input');
 // Listen for the change event so we can capture the file
+
 fileInput.addEventListener('change',  (e) => {
     // Get a reference to the file
     const file = e.target.files[0];
     // Encode the file using the FileReader API
     const reader = new FileReader();
     reader.onloadend = () => {
-    var endcode = reader.result;
-   //  get data from localstorage
+    var endCode = reader.result;
+    //  get data from localstorage
     var photo = localStorage.getItem('photoURL');
     var user = localStorage.getItem('Name');
     var uemail = localStorage.getItem('emailID');
@@ -35,14 +36,14 @@ fileInput.addEventListener('change',  (e) => {
     {
       UserName:user,
       UserEmail:uemail,
-      Image :endcode,
+      Image :endCode,
       Userpic:photo
    } 
    // set object into rtdb
-   set(ref(db,user),{
+   set(ref(db,'/User',user),{ 
       post
   });
     // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
     };
     reader.readAsDataURL(file);
-});
+}  );
